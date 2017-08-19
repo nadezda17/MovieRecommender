@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Movie Recommender</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../../Content/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../../Content/css/thumbnail-gallery.css" rel="stylesheet">
+    <link href="../../Content/css/magnific-popup.css" rel="stylesheet">
+    <link href="../../Content/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="../../Content/css/custom.css" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="../../Content/images/favicon.png">
+
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" id="helloMsg" href="#">Movie Recommender</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link popup-with-form" id="profileLink" style="display:none;" href="#editProfileForm">Edit profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="logoutLink" style="display:none;" href="#">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link popup-with-form" id="loginLink" href="#loginForm">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link popup-with-form" id="registerLink" href="#signUpForm">Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+        <section id="startSec" style="display:none;">
+            <div class="startPageImage"></div>
+        </section>
+        <section id="adminSec" style="display:none;">
+            <form id="insertMovieForm" class="popup-modal mfp-hide content">
+                <h1>Movie details:</h1>
+
+                <div class="form-group">
+                    <label>Title:</label>
+                    <input type="text" name="title" class="form-control" placeholder="Enter Movie title">
+
+                    <label>Release date:</label>
+                    <input type="text" name="releaseDate" class="form-control" id="relDatePicker">
+
+                    <label>Genre:</label>
+                    <div><input type="text" name="genres" class="form-control"></div>
+                    <div><input type="text" name="genres" class="form-control"></div>
+                    <div><input type="text" name="genres" class="form-control"></div>
+
+                    <label for="image">Image: </label>
+                    <input class="image form-control" name="image" type="file" placeholder="Upload image" accept="image/*">
+                    <input id="imageName" name="imageName" type="text" placeholder="Image name" disabled="disabled">
+
+
+                    <label class="">Director name:</label>
+                    <input class="form-control" name="director" type="text">
+
+                    <label>
+                        Actors:
+                    </label>
+                    <input class="form-control" name="actors" type="text">
+                    <input class="form-control" name="actors" type="text">
+                    <input class="form-control" name="actors" type="text">
+
+                    <label class="">Cinema:</label>
+                    <input class="form-control" name="cinema" type="text">
+
+                    <label>Time Period:</label>
+                    <input class="form-control" name="tperiod" type="text">
+
+                    <div>
+                        <button id="insertMovieBtn" class="form-control" type="button">Insert</button>
+                    </div>
+                </div>
+            </form>
+
+            <h2 class="my-4 text-center text-lg-left">Manage users:</h2>
+            <div id="usersManager"></div>
+            <h2 class="my-4 text-center text-lg-left">Manage movies:</h2>
+            <a href="#insertMovieForm" class="popup-with-form btn btn-outline-success" title="">Insert new movie</a>
+            <div id="moviesManager"></div>
+
+        </section>
+        <section id="userSec" style="display:none;">
+            <h3 class="my-4 text-center text-lg-left" id="firstMsg"></h3>
+            <div id="popupMovieExpl" class="mfp-hide white-popup"></div>
+            <div id="popupMovieDetails" class="mfp-hide white-popup"></div>
+
+            
+            <div id="recommList"></div>
+            <div id="movieLikedPopup" style="width: 157px; text-align: center; background: #f8f9fa; opacity: 0.9;"></div>
+            <form id="signUpForm" class="popup-modal mfp-hide content">
+                <div>
+                    <h2>User details:</h2>
+                    <div class="">
+                        <label class="" for="username">
+                            Username:
+                        </label>
+                        <input class="" name="username" type="text">
+                    </div>
+                    <div class="">
+                        <label class="" for="password">
+                            Password:
+                        </label>
+                        <input class="" name="password" type="password">
+                    </div>
+                    <div class="">
+                        <label class="" for="firstName">
+                            First name:
+                        </label>
+                        <input class="" name="firstName" type="text">
+                    </div>
+                    <div class="">
+                        <label class="" for="lastName">
+                            Last name:
+                        </label>
+                        <input class="" name="lastName" type="text">
+                    </div>
+                    <button class="btn btn-primary" id="signUpBtn" type="button">Sign up</button>
+                </div>
+
+            </form>
+
+            <form id="loginForm" class="popup-modal mfp-hide content">
+                <h1>Welcome back!</h1>
+                <ul style="list-style:none;">
+                    <li>
+                        <label class="" for="username">
+                            <span class="">Username:</span>
+                        </label>
+                        <input class="" name="username" type="text">
+                   
+                        <label class="" for="password">
+                            <span class="">Password:</span>
+                        </label>
+                        <input class="" name="password" type="password">
+                        <button class="btn btn-primary" id="loginBtn" type="button">Login</button>
+                    </li>
+                </ul>
+            </form>
+
+            <form id="editProfileForm" class="popup-modal mfp-hide">
+                <h1>User details:</h1>
+                <ul>
+                    <li>
+                        <label for="username">Username</label>
+                        <input name="username" type="text" readonly="readonly">
+                    </li>
+                    <li>
+                        <label for="password">Password:</label>
+                        <input name="password" type="password">
+                    </li>
+                    <li>
+                        <label for="firstlName">First name:</label>
+                        <input name="firstName" type="text">
+                    </li>
+                    <li>
+                        <label for="lastName">Last name:</label>
+                        <input name="lastName" type="text">
+                    </li>
+                    <li>
+                        <button class="btn btn-primary" id="editProfileBtn" type="button">Save changes</button>
+                    </li>
+                </ul>
+            </form>
+
+            <div class="row text-center text-lg-left">
+                <div id="renderMovies"></div>
+            </div>
+
+            <div>
+                <strong>Search movies by</strong>
+                <span class="filterSpan">
+                    <strong>Genre:</strong>
+                    <select name="genre" type="" id="genreFilterEl" style="width:100px;">
+                    </select>
+                </span>
+                <span>
+                    <strong>Director:</strong>
+                    <select name="director" type="" id="directorFilterEl" style="width:100px;">
+                        <option value="" selected disabled hidden></option>
+                    </select>
+                </span>
+                <span>
+                    <strong>Actor:</strong>
+                    <select name="actor" type="" id="actorFilterEl" style="width:100px;">
+                        <option value="" selected disabled hidden></option>
+                    </select>
+                </span>
+                <span>
+                    <strong>Cinema:</strong>
+                    <select name="cinema" type="" id="cinemaFilterEl" style="width:100px;">
+                        <option value="" selected disabled hidden>
+                        <option>
+                    </select>
+                </span>
+                <span>
+                    <button class="btn btn-primary" id="filterBtn" type="button">Search</button>
+                </span>
+            </div>
+            <div id="searchMoviesDiv"></div>
+
+            <div>
+                <strong>Users similar to you:</strong>
+                <div id="similarUsersDiv"></div>
+                <div id="watchedMoviesDiv"></div>
+            </div>
+        </section>
+        <section id="explSec" style="display:none;">
+            
+        </section>
+    </div>
+    <!-- /.container -->
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white"></p>
+        </div>
+        <!-- /.container -->
+    </footer>
+    <!-- Bootstrap core JavaScript -->
+    <script id="allMoviesTemplate" type="text/x-handlebars-template">   
+        <ul class="container float">
+            {{#each movies}}
+            <li class="item float-item">
+                <div class="blurredBg d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="../../Content/images/movies/{{imageFileName}}" style="width:220px;height:327px;">
+                    {{#if ../admin}}
+                    <div>
+                        <div class="movieBtn" style:"bottom:0px;">
+                            <a class="movieBtn movieDetails" onclick="showMovieDetails('{{id}}')">Details</a>
+                        </div>
+                        <div class="movieBtn">
+                            <a class="movieBtn" onclick="deleteMovie('{{id}}')">delete</a>
+                        </div>
+                    </div>
+                    {{else}}
+                    <div>
+                        <div class="movieBtn">
+                            <a class="movieBtn" onclick="triggerMovieLike('{{id}}',true)">like</a>
+                        </div>
+                        <div class="movieBtn">
+                            <a class="movieBtn" onclick="triggerMovieLike('{{id}}',false)">dislike</a>
+                        </div>
+                        <div class="movieBtn">
+                            <a class="movieBtn movieDetails" onclick="showMovieDetails('{{id}}')">Details</a>
+                        </div>
+                        <div class="movieBtn">
+                            <a class="movieBtn movieExplanation" onclick="showExplanation('{{id}}')">Explanation</a>
+                        </div>
+                        <div class="movieBtn">
+                            <a class="movieBtn movieTrailer" onclick="showTrailer('{{trailer}}')">Watch trailer</a>
+                        </div>
+                    </div>
+                    {{/if}}
+
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </script>
+    <script id="filteredMoviesTemplate" type="text/x-handlebars-template">
+        <ul class="container float">
+            {{#each movies}}
+            <li class="item float-item">
+                <div class="blurredBg d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="../../Content/images/movies/{{imageFileName}}" style="width:220px;height:327px;">
+                    {{#if ../admin}}
+                    <a class="movieBtn" style="left: 5px;bottom:1px;color: honeydew;cursor: pointer; position: relative;text-align: center;" onclick="deleteMovie('{{id}}')">delete</a>
+                    {{else}}
+                    <div>
+                        <div class="movieBtn">
+                            <a class="movieBtn" onclick="triggerMovieLike('{{id}}',true)">like</a>
+                        </div>
+                        <div class="movieBtn">
+                            <a class="movieBtn" onclick="triggerMovieLike('{{id}}',false)">dislike</a>
+                        </div>
+                        <div class="movieBtn">
+                            <a class="movieBtn movieDetails" onclick="showMovieDetails('{{id}}')">Details</a>
+                        </div>
+                        <div class="movieBtn">
+                            <a class="movieBtn movieTrailer" onclick="showTrailer('{{trailer}}')">Watch trailer</a>
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </script>
+    <script id="allUsersTemplate" type="text/x-handlebars-template">
+        <ul class="container float">
+            {{#each users}}
+            <li class="item float-item">
+                <div style="width:220px;height:120px;background: rgb(107, 166, 230);">
+                    <div>First name: {{firstName}}</div>
+                    <div>Last name: {{lastName}}</div>
+                    <div>Username: {{username}}</div>
+                    {{#if ../admin}}
+                    <button class="btn btn-primary" onclick="deleteUser('{{username}}')">Click to delete</button>
+                    {{else}}
+                    <button class="btn btn-primary" onclick="watchedMovies('{{username}}')">Watched movies</button>
+                 {{/if}}
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+    </script>
+    
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jquery-ui.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/cookie.js"></script>
+    <script src="../../js/classie.js"></script>
+    <script src="../../js/jquery.magnific-popup.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/handlebars-v4.0.5.js"></script>
+    <script src="../../js/userScript.js"></script>
+    <script src="../../js/movieScript.js"></script>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

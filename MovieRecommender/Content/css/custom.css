@@ -1,0 +1,111 @@
+﻿.container {
+  list-style:none;
+  /*margin: 0;*/
+  padding: 0;
+}
+.item {
+  /*padding: 5px;
+  width: 200px;
+  height: 150px; */
+  margin: 10px;
+
+  
+  /*line-height: 150px;
+  color: white;*/
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+}
+
+/*float layout*/
+.float {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.float:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.float-item {
+  float: left;
+}
+
+#insertMovieForm input, #insertMovieForm label {
+    width: 50%;
+    margin-left: 10px;
+}
+
+.blurredBg{
+    width:220px;
+    height:327px;
+    display:inline-block;
+    position:relative;
+    transition:.3s;
+    margin:4px;
+  }
+  
+  .blurredBg img{
+    width:100%;
+    height:100%;
+    transition:.3s;
+    border-radius:4px;
+  }
+  
+  .blurredBg:hover img{
+    filter:blur(2px) brightness(60%);
+    box-shadow:0 0 16px;
+  }
+   
+  .blurredBg :not(img){
+    position:absolute;
+    z-index:1;
+    top:30%;
+    width:100%;
+    text-align:center;
+    color:#fff;
+    opacity:0;
+    transition:.3s;
+  }
+  
+  .blurredBg h3{
+    top:50%
+  }
+  
+  .blurredBg:hover :not(img){
+    opacity:1;
+  }
+
+.blurredBg div {
+    margin-bottom:10px;
+}
+
+a.movieBtn, div.movieBtn {
+    bottom: 45px;
+    color: honeydew;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+}
+
+
+.white-popup {
+  position: relative;
+  padding: 40px;
+  width: auto;
+  max-width: 200px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.filterSpan {
+    left:1px;
+}
+
+.startPageImage {
+    content:url("../../Content/images/cinema1.jpg");
+    width:100%;
+    height:100%;
+}
